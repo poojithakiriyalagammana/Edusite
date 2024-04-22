@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Student Registration</title>
+	<link rel="stylesheet" type="text/css" href="registration.css">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			// Function to handle form submission
+			$('#registrationForm').submit(function (event) {
+				event.preventDefault();
+
+				// Get form data
+				const SID = $('#SID').val();
+				const FirstName = $('#FirstName').val();
+				const LastName = $('#LastName').val();
+				const email = $('#email').val();
+				const NearCity = $('#NearCity').val();
+				const Guardian = $('#Guardian').val();
+				const Course = [];
+				$('input[name="Course"]:checked').each(function () {
+					Course.push($(this).attr('id'));
+				});
+				console.log($('#Email').val())
+				// Create student object
+				const student = {
+					SID: SID,
+					FirstName: FirstName,
+					LastName: LastName,
+					email: email,
+					NearCity: NearCity,
+					Guardian: Guardian,
+					Course: Course
+
+				};
+
+				// Send POST request to the API
+				$.ajax({
+					url: 'http://localhost:3070/student/add',
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify(student),
+					success: function (response) {
+						// Registration successful
+						alert('Registration successful!');
+						$('#registrationForm')[0].reset();
+					},
+					error: function (xhr, status, error) {
+						// Registration failed
+						alert('Registration failed. Error: ' + error);
+					}
+				});
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+		<div class="container">
+		<div class="row justify-content-center mt-5">
+	<div class="rb">
+		<div class="title">Registration</div>
+		<form id="registrationForm">
+			
+		  <label for="sid" class="pp">SID:</label>
+				<input type="text" id="SID" name="SID" placeholder="" class="pp">
+			
+				<label for="firstName" class="pp">First Name:</label>
+				<input type="text" id="FirstName" name="FirstName" class="pp">
+           
+				<label for="lastName" class="pp">Last Name:</label>
+				<input type="text" id="LastName" name="LastName" class="pp">
+                 
+						
+				<label for="email" class="pp">Email:</label>
+				<input type="email" id="email" name="email" class="pp">
+				
+							
+				<label for="Password" class="pp">Password:</label>
+				<input type="Password" id="Password" name="Password" class="pp">
+			
+								
+				<label for="confirmePassword" class="pp">Confirm password:</label>
+				<input type="Password" id="confirmePassword" name="confirmePassword" class="pp">
+	        	
+				<label for="nearCity" class="pp">Near City:</label>
+				<input type="text" id="NearCity" name="NearCity" onClick=" mouseout()" class="pp">
+				  
+										
+				<label for="Guardian" class="pp">Guardian:</label>
+				<input type="text" id="Guardian" name="Guardian" class="pp">
+		
+
+				<label for="Course">Course:</label>
+			
+				  <label for="foundation"><input type="radio" name="Course" id="foundation"> Foundation</label>
+				  <label for="hnd"><input type="radio" name="Course" id="hnd"> HND</label>
+				   <label for="Degree"><input type="radio" name="Course" id="degree"> Degree</label>
+			
+		  <input type="submit" value="Submit">
+				
+		</form>
+	</div>
+	</div>
+	</div>
+		<script>
+		function mouseout() {
+			var password= document.getElementById("Password").value;
+			var	confirmePassword= document.getElementById("confirmePassword").value;
+		
+			if(password != confirmePassword){
+				alert("password didn't match try again");
+				return false
+			}
+			return true
+		}
+		</script>
+</body>
+
+</html>
+
+
+<!---
+<label for="Course">Course:</label>
+				<input type="checkbox" id="foundation" name="Course" checked>
+				<label for="foundation">Foundation</label>
+				<input type="checkbox" id="hnd" name="Course">
+				<label for="hnd">HND</label>
+				<input type="checkbox" id="degree" name="Course">
+				<label for="degree">Degree</label>
+
+				<label for="Guardian">Guardian:</label>
+				<input type="text" id="Guardian" name="Guardian"> -->

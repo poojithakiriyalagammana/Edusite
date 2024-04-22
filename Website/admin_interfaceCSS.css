@@ -1,0 +1,101 @@
+@charset "utf-8";
+/* CSS Document */
+/**{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	outline: none;
+}
+body{
+
+	justify-content: center;
+	align-items: center;
+	background-image: url( "img/course02.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-size: cover;
+}
+.container{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	padding: 70px 0px;
+	max-width: 4000px;
+	margin: 0 auto;		
+}
+select {
+	width: 100%;
+	padding: 15px;
+	font-size: 16px;
+	font-weight: 700;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	cursor: pointer;
+}
+form{
+	width: 700px;
+	height: 650px;
+	background: #fff;
+	color: #000;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 7px 30px;
+	border-radius: 7%;
+	
+	}
+form input{
+	width: 100%;
+	margin-bottom: 30px;
+}
+form input[type="number"], input[type="text"],input[type="password"]
+{
+	border: none;
+	border-bottom: 1px solid #000;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #000;
+	font-size: 16px;
+}
+form span
+{
+	font-size: 25px;
+	font-weight: 500;
+	position: relative;
+	}
+form input[type="submit"], input[type="button"]
+{
+	border: none;
+	outline: none;
+	height: 30px;
+	background: #B8D527;
+	color: #000;
+	font-size: 14px;
+	border-radius: 12px;
+}
+form input[type="button"]:hover
+{
+	cursor: pointer;
+	background: #5FE800;
+	color: #fff;
+}
+form input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #5FE800;
+	color: #fff;
+}
+
+p{
+	font-weight: 6000px;
+	
+}
+h1{
+	color: aliceblue;
+	padding: 1px;
+
+}

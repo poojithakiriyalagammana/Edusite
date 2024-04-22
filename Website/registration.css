@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	justify-content: center;
+	align-items: center;
+	background-image: url( "img/course04.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-size: cover;
+}
+.rb{
+	max-width: 700px;
+	width: 100%;
+	background: #fff;
+	padding: 20px 30px;
+	border-radius: 15px;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+}
+.rb .title{
+	font-size: 50px;
+	font-weight: 500;
+	position: relative;
+}
+.rb .title::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	width: 30px;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(179,236,29,1) 100%, rgba(0,212,255,1) 100%);
+}
+.rb form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 20px 0 12px 0;
+}
+form .pp{
+	margin-bottom: 20px;
+	width: calc(105% / 2 - 20px);
+}
+form  .lable{
+	display: block;
+	font-weight: 500;
+	margin-bottom: 15px;
+}
+form input[type="number"], input[type="text"],input[type="password"],input[type="email"]
+{
+	height: 30px;
+	width: 50%;
+	border-radius: 5px;
+	border: 1px solid #000000 ;
+	padding-left:15px;
+	font-size: 18px;
+	border-bottom-width: 1px;
+}
+form  input:focus,
+form  input:valid
+{
+	border-color: #0F7300;
+}
+
+
+/*form.btn{
+	height: 45px;
+	margin: 45px 0;
+}*/
+form input[type="submit"]{
+	height :100%;
+	width: 100%;
+	outline: none;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	font-weight: 500;
+	border-radius: 5px;
+	letter-spacing: 1px;
+	background: #000000;
+	
+}
+form input[type="submit"]:hover{
+	background: #1B8100;
+}
+

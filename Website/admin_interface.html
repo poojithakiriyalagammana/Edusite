@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+
+    <link href="stu_int.css" rel="stylesheet" type="text/css">
+    <script>
+        $(document).ready(function () {
+            $("#selection").on('change', function () {
+                $(".details").hide();
+                $("#" + $(this).val()).fadeIn(700);
+            }).change();
+        });
+    </script>
+
+    <title>Student List</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <div class="Menu">
+            
+            <input type="text" id="searchInput" placeholder="Search..." />
+            <button onclick="searchByColumn($('#selection').val())">Search</button>
+        </div>
+    </div>
+
+    <script>
+        function fetchStudents(searchTerm = '') {
+    $.ajax({
+        url: 'http://localhost:3070/student/', // Replace with your API endpoint URL
+        type: 'GET',
+        success: function (response) {
+            const studentList = response;
+
+            // Filter the student data based on the search term
+            const filteredStudents = studentList.filter(function (student) {
+                
+				return (
+					student.SID.toLowerCase().includes(searchTerm.toLowerCase())||
+                    student.FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    student.LastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    student.NearCity.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    student.Guardian.toLowerCase().includes(searchTerm.toLowerCase()) 
+                );
+            });
+
+            // Iterate through each filtered student and create a table row
+            let tableRows = '';
+            filteredStudents.forEach(function (student) {
+                tableRows += '<tr>';
+                tableRows += '<td>' + '<input type="text" value="' + student.SID + '" class="edit-field" data-id="' + student._id + '" data-field="SID" />' + '</td>';
+                tableRows += '<td>' + student.FirstName + '</td>';
+                tableRows += '<td>' + student.LastName + '</td>';
+                tableRows += '<td>' + student.NearCity + '</td>';
+                tableRows += '<td>' + student.Guardian + '</td>';
+                tableRows += '<td>' + student.email + '</td>';
+				
+                tableRows += '<td>' + '<input type="text" value="' + student.Course + '" class="edit-field" data-id="' + student._id + '" data-field="Course" />' + '</td>';
+				
+                tableRows += '<td><button class="delete-btn" onclick="deleteStudent(\'' + student._id + '\')">Delete</button></td>';
+                tableRows += '<td><button class="edit-btn" onclick="updateStudent(\'' + student._id + '\')">Save</button></td>';
+                tableRows += '</tr>';
+            });
+
+            // Append the table rows to the student table body
+            $('#studentTableBody').html(tableRows);
+        },
+        error: function (xhr, status, error) {
+            console.log('Failed to fetch students. Error: ' + error);
+        }
+    });
+}
+
+
+        // Function to handle the search functionality
+        function searchByColumn(column) {
+            const searchTerm = $('#searchInput').val();
+            fetchStudents(searchTerm);
+        }
+
+        // Function to delete a student using the API
+        function deleteStudent(id) {
+            $.ajax({
+                url: 'http://localhost:3070/student/delete/' + id, // Replace with your API endpoint URL
+                type: 'DELETE',
+                success: function (response) {
+                    console.log('Student deleted successfully');
+                    // Refresh the table after deletion
+                    fetchStudents();
+                },
+                error: function (xhr, status, error) {
+                    console.log('Failed to delete student. Error: ' + error);
+                }
+            });
+        }//delete student end
+
+
+		
+		
+		function updateStudent(id) {
+    const SID = $('.edit-field[data-id="' + id + '"][data-field="SID"]').val();
+    const Course = $('.edit-field[data-id="' + id + '"][data-field="Course"]').val();
+
+    // Make an AJAX request to update the student details on the server
+    $.ajax({
+        url: 'http://localhost:3070/student/update/' + id, // Replace with your API endpoint URL
+        type: 'PUT',
+        data: {
+            SID: SID,
+            Course: Course
+        },
+        success: function (response) {
+            console.log('Student updated successfully');
+        },
+        error: function (xhr, status, error) {
+            console.log('Failed to update student. Error: ' + error);
+        }
+    });
+}
+        // Call the fetchStudents function when the page loads
+        fetchStudents();
+    </script>
+	<table>
+    <thead>
+        <tr>
+            <th>SID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>NearCity</th>
+            <th>Guardian</th>
+            <th>email</th>
+            <th>Course</th>
+            <th></th><!-- Delete icon column -->
+            <th></th><!-- Edit icon column -->
+        </tr>
+    </thead>
+    <tbody id="studentTableBody">
+        <!-- The student data will be dynamically populated here -->
+    </tbody>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	outline: none;
+}
+body{
+
+	justify-content: center;
+	align-items: center;
+	background-image: url( "img/course02.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-size: cover;
+}
+.container{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	padding: 70px 0;
+	max-width: 400px;
+	margin: 0 auto;		
+}
+.Menu,
+.container{
+	width: 100%;
+}
+.pp{
+	width: 700px;
+	height: 450px;
+	background: #fff;
+	color: #000;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	border-radius: 7%;
+	}
+.pp input{
+	width: 100%;
+	margin-bottom: 30px;
+}
+.pp input[type="email"], input[type="number"],input[type="text"]
+{
+	border: none;
+	border-bottom: 1px solid #000;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #000;
+	font-size: 16px;
+}
+.pp span
+{
+	font-size: 25px;
+	font-weight: 500;
+	position: relative;
+	}
+.pp input[type="submit"], input[type="button"]
+{
+	border: none;
+	outline: none;
+	height: 40px;
+	background: #B8D527;
+	color: #000;
+	font-size: 18px;
+	border-radius: 20px;
+}
+.pp input[type="button"]:hover
+{
+	cursor: pointer;
+	background: #5FE800;
+	color: #fff;
+}
+.pp input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #5FE800;
+	color: #fff;
+}
+select {
+	width: 100%;
+	padding: 15px;
+	font-size: 16px;
+	font-weight: 700;
+	border-radius: 10px;
+	border: 2px solid #005700;
+	box-shadow: 0 1px 15px #000000;
+}
+.form .details{
+	padding: 25px;
+	background-color: #FFFFFF;
+	border: 2px solid #014B1C;
+	border-radius: 8px;
+}
+.details{
+	display: none;
+}
